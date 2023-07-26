@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  body{
+    background-color: bisque;
+  }
+</style>
+<body>
+  <h3>Q.1 Write one example explaining how you can write a callback function.</h3>  
+  <pre>Ans:
+    function outer(callback){
+      console.log("first");
+      inner();
+    }
+  
+    function inner(){
+      console.log("second");
+    }
+  
+  outer(inner);
+  </pre>
+  <h3> <pre> Q.2Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec,
+     3 should be printed after 3 sec, and so on. 
+
+    Explain callback hell.
+    Numbers
+    1
+    2
+    3
+    4
+    5
+    6
+    7</pre>
+  </h3> 
+  <pre>setTimeout(()=>{
+    console.log(1);
+    setTimeout(()=>{
+        console.log(2);
+        setTimeout(()=>{
+            console.log(3);
+            setTimeout(()=>{
+                console.log(4);
+                
+            },4000)
+            
+        },3000)
+        
+    },2000)
+},1000)
+<h2>Callback Hell:</h2>
+<pre>In above example our code grows in horizontal manner which is not regarding our rule and if any function got error then functions
+   comes under that are going to be termination which is difficult to us and called callback hell</pre></pre>
+  
+  <h3>Q.3"Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+    Numbers
+    1
+    2
+    3
+    4
+    5
+    6
+    7"</h3>  
+
+    <pre>const printingNumbers = (number, delay) => {
+      return new Promise((resolve) => {
+      setTimeout(() => {
+      console.log(number);
+      resolve();
+      }, delay);
+      });
+      };
+      const SequentialNumbers = async () => {
+      const result = [];
+      for (let i = 1; i<= 7; i++) {
+      result.push(printingNumbers(i, i * 1000));
+      }
+      await Promise.all(promises);
+      };
+      SequentialNumbers();</pre>
+
+  <h3>Q.4 "Create a promise function accepting an argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed 
+    then it should go to reject the state and catch the error and print Promise Rejected "</h3>  
+
+  <pre>var result="yes";
+    const promise=new Promise((resolve,reject)=>{
+      if(result==="yes"){
+        console.log("hello")
+        resolve("promise resolved");
+      }
+      else{
+        reject("not resolved");
+      }
+    })
+    
+    promise.then((result)=>{
+        console.log(result);
+    }).catch((err)=>{
+        console.log(err)
+    })</pre>
+
+
+
+  <h3>Q.5 Create examples to explain callback function</h3>  
+
+  <pre> function outer(callback){
+    console.log("first");
+    inner();
+  }
+
+  function inner(){
+    console.log("second");
+  }
+
+outer(inner);
+
+In above example we are passing one function as an parameter to another function and the can call it inside that function i.e outer function.is called as callback function.</pre>
+  
+
+<h3>Q.6 Create examples to explain callback hell function</h3>  
+<pre>setTimeout(()=>{
+  console.log(1);
+  setTimeout(()=>{
+      console.log(2);
+      setTimeout(()=>{
+          console.log(3);
+          setTimeout(()=>{
+              console.log(4);
+              
+          },4000)
+          
+      },3000)
+      
+  },2000)
+},1000)
+
+above we can see the set time out having different times of execution but all the set time out depend on outer set time out methods if any one methods
+is got wrong then all that preciding timeout got as an error as it is growing X-mas tree like structure so it called as callback hell.</pre>
+  
+
+<h3>Q.7Create examples to explain promises function</h3>  
+<pre>var result="booked";
+  const promise=new Promise((resolve,reject)=>{
+    if(result==="booked"){
+      console.log("hello")
+      resolve("Ticket booked");
+    }
+    else{
+      reject("not booked");
+    }
+  })
+  
+  promise.then((result)=>{
+      console.log(result);
+  }).catch((err)=>{
+      console.log(err)
+  })
+
+In above promise it is depend on response or reject method if our ticket is booked it shows us a booked status otherwise shows not booked 
+status</pre>
+
+<h3>Q.8 Create examples to explain async await function</h3>
+<pre>const apiUrl="https://api.github.com/users"
+  let users=[]
+  
+  async function fetchdata(){
+    const res=  await fetch(apiUrl);
+    const data=await res.json();
+    users.push(...data);
+    setCards();
+  
+    console.log(users);
+  
+  }
+  fetchdata();
+  
+   const setCards=function refresh(){
+  
+  users.map((user)=>{
+      let parent=document.getElementById("parent");
+      let parentCard=document.createElement("div");
+      let images=document.createElement("img");
+      let names=document.createElement("h1");
+
+
+ parentCard.appendChild(images);
+parentCard.appendChild(names);
+parent.appendChild(parentCard);
+
+
+async and await used in above example for grtting data from server it means if data from perticular line or function not received then wait for that data
+and then go beyond that line
+
+</pre>
+
+
+<h3>Q.9Create examples to explain promise.all function</h3>
+<pre>function promise1(){
+  return new Promise((resolve)=>{
+setTimeout(()=>{
+   resolve("first")
+},1000)
+})
+}
+
+function promise2(){
+ return  new Promise((resolve)=>{
+setTimeout(()=>{
+   resolve("second")
+},2000)
+})
+}
+
+function promise3(){
+  return new Promise((resolve)=>{
+setTimeout(()=>{
+   resolve("third")
+},3000)
+})
+}
+
+Promise.all([promise1(),promise2(),promise3()])
+.then((result)=>{
+   console.log(result);
+})
+
+In promise.all all promises resolve simultaneously but showing result as they can depending on its delay time it is use to
+run all promises by ome line </pre>
+
+
+
+
+
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
